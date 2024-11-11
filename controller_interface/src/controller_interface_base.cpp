@@ -34,7 +34,7 @@ return_type ControllerInterfaceBase::init(
 
   try
   {
-    auto_declare<int>("update_rate", update_rate_);
+    auto_declare<int>("update_rate", static_cast<int>(update_rate_));
     auto_declare<bool>("is_async", false);
     auto_declare<int>("thread_priority", 50);
   }
@@ -132,7 +132,7 @@ const rclcpp_lifecycle::State & ControllerInterfaceBase::configure()
     async_handler_->init(
       std::bind(
         &ControllerInterfaceBase::update, this, std::placeholders::_1, std::placeholders::_2),
-      thread_priority);
+      static_cast<int>(thread_priority));
     async_handler_->start_thread();
   }
   trigger_stats_.reset();
