@@ -186,7 +186,7 @@ std::size_t parse_size_attribute(const tinyxml2::XMLElement * elem)
   std::regex int_re("[1-9][0-9]*");
   if (std::regex_match(s, int_re))
   {
-    size = std::stoi(s);
+    size = static_cast<size_t>(std::stoi(s));
   }
   else
   {
@@ -890,7 +890,8 @@ std::vector<HardwareInfo> parse_control_resources_from_urdf(const std::string & 
 
         MimicJoint mimic_joint;
         mimic_joint.joint_index = i;
-        mimic_joint.mimicked_joint_index = find_joint(urdf_joint->mimic->joint_name);
+        mimic_joint.mimicked_joint_index = static_cast<std::size_t>(
+          find_joint(urdf_joint->mimic->joint_name));
         mimic_joint.multiplier = urdf_joint->mimic->multiplier;
         mimic_joint.offset = urdf_joint->mimic->offset;
         hw_info.mimic_joints.push_back(mimic_joint);
