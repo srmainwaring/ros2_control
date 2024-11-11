@@ -72,7 +72,12 @@ public:
    */
   void write_and_read()
   {
+#if defined(__APPLE__)
+    // On macOS system_clock::duration is microseconds.
+    typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> TimePoint;
+#else
     using TimePoint = std::chrono::system_clock::time_point;
+#endif
 
     std::visit(
       [this](auto & component)
