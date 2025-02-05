@@ -23,6 +23,10 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   generate_parameter_library
 )
 
+if(APPLE)
+  find_package(Threads REQUIRED)
+endif()
+
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(ament_cmake_core REQUIRED)
