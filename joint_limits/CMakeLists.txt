@@ -19,6 +19,10 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   urdf
 )
 
+if(APPLE)
+  find_package(Threads REQUIRED)
+endif()
+
 find_package(ament_cmake REQUIRED)
 find_package(backward_ros REQUIRED)
 find_package(ament_cmake_gen_version_h REQUIRED)
